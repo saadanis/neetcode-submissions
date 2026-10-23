@@ -9,24 +9,23 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: update-readme
-  cancel-in-progress: false
+concurrency: update-readme
 
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - run: python scripts/update_readme.py
+      - run: python3 scripts/update_readme.py
       # Pushes made with GITHUB_TOKEN don't trigger workflows, so this can't loop.
       - run: |
           git diff --quiet README.md && exit 0
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -am "Update README progress"
-          git pull --rebase
-          git push
+          # NeetCode can push between our pull and push, so retry a few times.
+          for attempt in 1 2 3; do
+            git pull --rebase && git push && exit 0
+            sleep 5
+          done
+          exit 1
