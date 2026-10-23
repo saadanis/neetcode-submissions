@@ -17,13 +17,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python3 scripts/update_readme.py
-      # Pushes made with GITHUB_TOKEN don't trigger workflows, so this can't loop.
       - run: |
           git diff --quiet README.md && exit 0
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -am "Update README progress"
-          # NeetCode can push between our pull and push, so retry a few times.
           for attempt in 1 2 3; do
             git pull --rebase && git push && exit 0
             sleep 5

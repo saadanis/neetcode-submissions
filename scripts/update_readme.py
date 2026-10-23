@@ -8,8 +8,6 @@ ROOT = Path(__file__).resolve().parent.parent
 SOLUTIONS = ROOT / "Data Structures & Algorithms"
 README = ROOT / "README.md"
 
-# NeetCode doesn't sync problem metadata, so new problems need a line here.
-# Unlisted ones still show up, under "Other".
 PROBLEMS = {
     "duplicate-integer": ("Arrays & Hashing", "Easy"),
     "is-anagram": ("Arrays & Hashing", "Easy"),
@@ -64,7 +62,6 @@ def render():
         slug = problem_dir.name
         topic, difficulty = PROBLEMS.get(slug, ("Other", "Unknown"))
         submission = latest_submission(problem_dir)
-        # A folder can be left empty locally after its last submission is removed.
         if submission is None:
             continue
         latest = submission.relative_to(ROOT).as_posix()
@@ -77,7 +74,6 @@ def render():
 
     solved = sum(difficulty_counts.values())
     breakdown = " · ".join(f"{difficulty_counts[d]} {d}" for d in DIFFICULTIES if difficulty_counts[d])
-    # Markdown tables can't merge cells, so this is HTML for the topic rowspan.
     lines = [
         f"**{solved} problems solved** ({breakdown})",
         "",
@@ -101,7 +97,6 @@ def main():
         readme,
         flags=re.DOTALL,
     )
-    # Fail loudly so a removed marker doesn't silently freeze the table.
     if count != 1:
         raise SystemExit("README.md needs exactly one progress:start/progress:end marker pair")
     README.write_text(updated)
