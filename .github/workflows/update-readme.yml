@@ -1,0 +1,29 @@
+name: Update README progress
+
+on:
+  push:
+    branches: [main]
+    paths: ["Data Structures & Algorithms/**", "scripts/update_readme.py"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency: update-readme
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/update_readme.py
+      - run: |
+          git diff --quiet README.md && exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Update README progress"
+          for attempt in 1 2 3; do
+            git pull --rebase && git push && exit 0
+            sleep 5
+          done
+          exit 1
