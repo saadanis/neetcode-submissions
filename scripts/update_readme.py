@@ -1,5 +1,3 @@
-"""Regenerate the progress section of README.md from the synced submissions."""
-
 import re
 from collections import Counter
 from html import escape
@@ -44,11 +42,19 @@ PROBLEMS = {
     "level-order-traversal-of-binary-tree": ("Trees", "Medium"),
 }
 TOPIC_ORDER = list(dict.fromkeys(topic for topic, _ in PROBLEMS.values())) + ["Other"]
-DIFFICULTIES = ["Easy", "Medium", "Hard"]
+DIFFICULTIES = ["Easy", "Medium", "Hard", "Unknown"]
+SMALL_WORDS = {"a", "an", "and", "from", "in", "of", "or", "the", "to"}
 
 
 def latest_submission(problem_dir):
-    return max(problem_dir.glob("submission-*.*"), key=lambda p: int(re.search(r"\d+", p.stem).group()))
+    return max(
+        problem_dir.glob("submission-*.*"), key=lambda p: int(re.search(r"\d+", p.stem).group()), default=None
+    )
+
+
+def title_from_slug(slug):
+    words = slug.split("-")
+    return " ".join([words[0].title()] + [w if w in SMALL_WORDS else w.title() for w in words[1:]])
 
 
 def render():
@@ -56,9 +62,13 @@ def render():
     difficulty_counts = Counter()
     for problem_dir in sorted(p for p in SOLUTIONS.iterdir() if p.is_dir()):
         slug = problem_dir.name
-        topic, difficulty = PROBLEMS.get(slug, ("Other", "—"))
-        latest = latest_submission(problem_dir).relative_to(ROOT).as_posix()
-        title = slug.replace("-", " ").title()
+        topic, difficulty = PROBLEMS.get(slug, ("Other", "Unknown"))
+        submission = latest_submission(problem_dir)
+        # A folder can be left empty locally after its last submission is removed.
+        if submission is None:
+            continue
+        latest = submission.relative_to(ROOT).as_posix()
+        title = title_from_slug(slug)
         by_topic.setdefault(topic, []).append(
             f'<td><a href="https://neetcode.io/problems/{slug}">{title}</a></td>'
             f'<td>{difficulty}</td><td><a href="{quote(latest)}">code</a></td>'
@@ -66,7 +76,7 @@ def render():
         difficulty_counts[difficulty] += 1
 
     solved = sum(difficulty_counts.values())
-    breakdown = " · ".join(f"{difficulty_counts[d]} {d}" for d in DIFFICULTIES)
+    breakdown = " · ".join(f"{difficulty_counts[d]} {d}" for d in DIFFICULTIES if difficulty_counts[d])
     # Markdown tables can't merge cells, so this is HTML for the topic rowspan.
     lines = [
         f"**{solved} problems solved** ({breakdown})",
@@ -85,12 +95,15 @@ def render():
 
 def main():
     readme = README.read_text()
-    updated = re.sub(
-        r"(<!-- progress:start -->\n).*?(<!-- progress:end -->)",
-        lambda m: f"{m[1]}{render()}\n{m[2]}",
+    updated, count = re.subn(
+        r"(<!-- progress:start -->).*?(<!-- progress:end -->)",
+        lambda m: f"{m[1]}\n{render()}\n{m[2]}",
         readme,
         flags=re.DOTALL,
     )
+    # Fail loudly so a removed marker doesn't silently freeze the table.
+    if count != 1:
+        raise SystemExit("README.md needs exactly one progress:start/progress:end marker pair")
     README.write_text(updated)
 
 
