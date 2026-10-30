@@ -38,6 +38,6 @@ Popular coding interview problems, solved using Python, automatically synced fro
 <tr><td><a href="https://neetcode.io/problems/lowest-common-ancestor-in-binary-search-tree">Lowest Common Ancestor in Binary Search Tree</a></td><td>Medium</td><td><a href="Data%20Structures%20%26%20Algorithms/lowest-common-ancestor-in-binary-search-tree/submission-1.py">code</a></td></tr>
 <tr><td><a href="https://neetcode.io/problems/same-binary-tree">Same Binary Tree</a></td><td>Easy</td><td><a href="Data%20Structures%20%26%20Algorithms/same-binary-tree/submission-8.py">code</a></td></tr>
 <tr><td><a href="https://neetcode.io/problems/subtree-of-a-binary-tree">Subtree of a Binary Tree</a></td><td>Easy</td><td><a href="Data%20Structures%20%26%20Algorithms/subtree-of-a-binary-tree/submission-1.py">code</a></td></tr>
-<tr><td rowspan="1">Other</td><td><a href="https://neetcode.io/problems/valid-binary-search-tree">Valid Binary Search Tree</a></td><td>Unknown</td><td><a href="Data%20Structures%20%26%20Algorithms/valid-binary-search-tree/submission-0.py">code</a></td></tr>
+<tr><td rowspan="1">Other</td><td><a href="https://neetcode.io/problems/valid-binary-search-tree">Valid Binary Search Tree</a></td><td>Unknown</td><td><a href="Data%20Structures%20%26%20Algorithms/valid-binary-search-tree/submission-1.py">code</a></td></tr>
 </table>
 <!-- progress:end -->
