@@ -5,7 +5,7 @@ Popular coding interview problems, solved using Python, automatically synced fro
 ## Progress
 
 <!-- progress:start -->
-**31 problems solved** (12 Easy · 17 Medium · 2 Hard)
+**32 problems solved** (12 Easy · 18 Medium · 2 Hard)
 
 <table>
 <tr><th>Topic</th><th>Problem</th><th>Difficulty</th><th>Latest</th></tr>
@@ -32,7 +32,8 @@ Popular coding interview problems, solved using Python, automatically synced fro
 <tr><td><a href="https://neetcode.io/problems/remove-node-from-end-of-linked-list">Remove Nth Node From End of List</a></td><td>Medium</td><td><a href="Data%20Structures%20%26%20Algorithms/remove-node-from-end-of-linked-list/submission-2.py">code</a></td></tr>
 <tr><td><a href="https://neetcode.io/problems/reorder-linked-list">Reorder List</a></td><td>Medium</td><td><a href="Data%20Structures%20%26%20Algorithms/reorder-linked-list/submission-1.py">code</a></td></tr>
 <tr><td><a href="https://neetcode.io/problems/reverse-a-linked-list">Reverse Linked List</a></td><td>Easy</td><td><a href="Data%20Structures%20%26%20Algorithms/reverse-a-linked-list/submission-1.py">code</a></td></tr>
-<tr><td rowspan="8">Trees</td><td><a href="https://neetcode.io/problems/level-order-traversal-of-binary-tree">Binary Tree Level Order Traversal</a></td><td>Medium</td><td><a href="Data%20Structures%20%26%20Algorithms/level-order-traversal-of-binary-tree/submission-3.py">code</a></td></tr>
+<tr><td rowspan="9">Trees</td><td><a href="https://neetcode.io/problems/level-order-traversal-of-binary-tree">Binary Tree Level Order Traversal</a></td><td>Medium</td><td><a href="Data%20Structures%20%26%20Algorithms/level-order-traversal-of-binary-tree/submission-3.py">code</a></td></tr>
+<tr><td><a href="https://neetcode.io/problems/binary-tree-from-preorder-and-inorder-traversal">Construct Binary Tree From Preorder And Inorder Traversal</a></td><td>Medium</td><td><a href="Data%20Structures%20%26%20Algorithms/binary-tree-from-preorder-and-inorder-traversal/submission-3.py">code</a></td></tr>
 <tr><td><a href="https://neetcode.io/problems/invert-a-binary-tree">Invert Binary Tree</a></td><td>Easy</td><td><a href="Data%20Structures%20%26%20Algorithms/invert-a-binary-tree/submission-2.py">code</a></td></tr>
 <tr><td><a href="https://neetcode.io/problems/kth-smallest-integer-in-bst">Kth Smallest Element In a Bst</a></td><td>Medium</td><td><a href="Data%20Structures%20%26%20Algorithms/kth-smallest-integer-in-bst/submission-2.py">code</a></td></tr>
 <tr><td><a href="https://neetcode.io/problems/lowest-common-ancestor-in-binary-search-tree">Lowest Common Ancestor of a Binary Search Tree</a></td><td>Medium</td><td><a href="Data%20Structures%20%26%20Algorithms/lowest-common-ancestor-in-binary-search-tree/submission-1.py">code</a></td></tr>
